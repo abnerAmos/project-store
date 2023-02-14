@@ -1,7 +1,8 @@
 package com.project.store.controller;
 
 import com.project.store.model.User;
-import com.project.store.repository.UserRepository;
+import com.project.store.model.Order;
+import com.project.store.repository.OrderRepository;
 import com.project.store.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,15 +14,15 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/order")
+public class OrderController {
 
-    private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
     private final UserService userService;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        Optional<User> user = userRepository.findById(id);
+        Optional<Order> user = orderRepository.findById(id);
         return ResponseEntity.ok().body(user);
     }
 
@@ -32,8 +33,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody User user) {
-        userRepository.save(user);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    public ResponseEntity<?> create(@RequestBody Order order) {
+        orderRepository.save(order);
+        return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 }
