@@ -1,5 +1,6 @@
 package com.project.store.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -14,6 +15,7 @@ public class Payment {
     private Long id;
     private Instant moment;
 
+    @JsonIgnore
     @OneToOne
     @MapsId // Mapeando para as 2 entidade obterem o mesmo id
     private Order order;
