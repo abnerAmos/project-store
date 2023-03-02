@@ -18,7 +18,12 @@ public class Product {
     private Double price;
     private String imgUrl;
 
-    @Transient // Evita que este atributo seja inserido no Banco de dados
+    // @Transient - Evita que este atributo seja inserido no Banco de dados
+    // @JoinTable - Cria uma tabela de Associação no DB, onde gera campos que associam tabelas.
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>(); // Set, Evita que a lista não possua produtos repetidos
 
     public Product() {

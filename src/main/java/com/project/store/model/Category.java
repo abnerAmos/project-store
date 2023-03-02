@@ -1,5 +1,6 @@
 package com.project.store.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -14,7 +15,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Transient // Evita que este atributo seja inserido no Banco de dados
+    // @Transient Evita que este atributo seja inserido no Banco de dados
+    @JsonIgnore /* Ignora o campo na construção do Json (caso não adc esta anotação, Será gerado um Looping pois
+    * Categorias irá chamar Produtos e vice e versa sem fim. */
+    @ManyToMany(mappedBy = "categories") // informa por qual atributo esta sendo mapeado mapeado
     private Set<Product> products = new HashSet<>(); // Set, Evita que a lista não possua produtos repetidos
 
     public Category () {

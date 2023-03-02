@@ -21,7 +21,7 @@ public class User {
     private Integer phone;
     private Integer password;
 
-    @OneToMany(mappedBy = "user") // informa por qual variavel esta mapeado
+    @OneToMany(mappedBy = "user") // informa por qual atributo esta sendo mapeado mapeado
     private List<Order> orders;
 
     public User(Long id, String name, String email, Integer phone, Integer password) {
