@@ -30,6 +30,9 @@ public class Order {
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL) // Mapeando para as 2 entidade obterem o mesmo id
+    private Payment payment;
+
     public Order () {
     }
 
@@ -71,6 +74,14 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public Set<OrderItem> getItems() {
