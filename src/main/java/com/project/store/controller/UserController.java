@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +24,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
         Optional<User> user = userRepository.findById(id);
-        return ResponseEntity.ok().body(user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping
@@ -34,6 +36,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody User user) {
         userRepository.save(user);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}") // Retorna o caminho URI/URL do objeto criado no Header da resposta.
+                .buildAndExpand(user.getId()).toUri();
+        return ResponseEntity.created(uri).body(user);
     }
 }
