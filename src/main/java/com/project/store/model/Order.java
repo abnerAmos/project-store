@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @EqualsAndHashCode
 @Entity
@@ -23,6 +26,9 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "client_id") // nomeia a chave estrangeira
     private User user;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order () {
     }
@@ -65,5 +71,21 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
