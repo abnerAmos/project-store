@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductRepository productRepository;
