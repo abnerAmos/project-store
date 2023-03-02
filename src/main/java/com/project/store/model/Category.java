@@ -2,7 +2,9 @@ package com.project.store.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -12,6 +14,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Transient // Evita que este atributo seja inserido no Banco de dados
+    private Set<Product> products = new HashSet<>(); // Set, Evita que a lista não possua produtos repetidos
 
     public Category () {
 
@@ -36,6 +40,10 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     @Override

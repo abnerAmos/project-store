@@ -1,8 +1,8 @@
 package com.project.store.controller;
 
-import com.project.store.model.Category;
-import com.project.store.repository.CategoryRepository;
-import com.project.store.service.CategoryService;
+import com.project.store.model.Product;
+import com.project.store.repository.ProductRepository;
+import com.project.store.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,21 +15,21 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/categories")
-public class CategoryController {
+@RequestMapping("/produtos")
+public class ProductController {
 
-    private final CategoryRepository categoryRepository;
-    private final CategoryService categoryService;
+    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        Optional<Category> user = categoryRepository.findById(id);
+        Optional<Product> user = productRepository.findById(id);
         return ResponseEntity.ok().body(user);
     }
 
     @GetMapping
     public ResponseEntity<?> findAll() {
-        List<Category> list = categoryService.findAll();
+        List<Product> list = productService.findAll();
         return ResponseEntity.ok().body(list);
     }
 }
