@@ -1,5 +1,6 @@
 package com.project.store.controller;
 
+import com.project.store.exceptions.ResourceNotFoundException;
 import com.project.store.model.User;
 import com.project.store.repository.UserRepository;
 import com.project.store.service.UserService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,9 +24,9 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id) {
+    public User findById(@PathVariable Long id) {
         Optional<User> user = userRepository.findById(id);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     @GetMapping
