@@ -10,9 +10,11 @@ A aplicação consiste em um CRUD, e possui uma estrutura MVC ao qual os dados s
 
 ## Modelo conceitual UMI
 
-img1
+![1](https://user-images.githubusercontent.com/122306064/224030988-0849aa50-973c-4f56-82ec-7ede04d29367.jpg)
 
-img2
+---------------------------------------------
+
+![2](https://user-images.githubusercontent.com/122306064/224031212-fed22971-0541-4f3b-8237-af964b597a43.jpg)
 
 # Tecnologias utilizadas
 
@@ -22,3 +24,14 @@ img2
 - Maven
 - Database H2
 - Postman
+
+# Como executar o projeto
+
+```bash
+# clonar repositório
+git clone https://github.com/abnerAmos/project-store.git
+# entrar na pasta do projeto back end
+cd backend
+# executar o projeto
+./mvnw spring-boot:run
+```
